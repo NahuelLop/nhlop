@@ -1,11 +1,317 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mi primera página en GitHub Pages</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nahuel López — Analista de Sistemas & Solucionador de Problemas</title>
+  <meta name="description" content="Landing personal de Nahuel López: analista de sistemas y solucionador multifacético de problemas. RPA, arquitectura, integración, y desarrollo full‑stack." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nahuel López — Analista de Sistemas" />
+  <meta property="og:description" content="Diseño soluciones simples para problemas complejos: RPA, integración, arquitectura y desarrollo." />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0f172a/ffffff.png&text=Nahuel+Lopez" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --bg-2:#0e1428;
+      --card:#111827cc;
+      --txt:#e5e7eb;
+      --muted:#94a3b8;
+      --brand:#38bdf8; /* cian */
+      --accent:#f59e0b; /* amber */
+      --ring:#22d3ee44;
+      --ok:#10b981;
+      --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f8fafc; --bg-2:#eef2ff; --card:#ffffffee; --txt:#0f172a; --muted:#475569; --shadow:0 10px 30px rgba(2,6,23,.08); }
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--txt); background:radial-gradient(1200px 600px at 80% -10%, #1f2937 0%, transparent 60%),
+               radial-gradient(900px 500px at -10% 10%, #0ea5e9 0%, transparent 55%),
+               linear-gradient(180deg, var(--bg), var(--bg-2));
+      line-height:1.6;
+    }
+    a{ color:var(--brand); text-decoration:none }
+    a:hover{ text-decoration:underline }
+    .container{ width:min(1100px, 92%); margin-inline:auto }
+    header{
+      position:sticky; top:0; backdrop-filter:saturate(150%) blur(8px);
+      background:linear-gradient(180deg, rgba(2,6,23,.75), rgba(2,6,23,.45));
+      border-bottom:1px solid #33415566; z-index:50
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .brand{ display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.4px }
+    .brand .dot{ width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg,var(--brand),#14b8a6) }
+    .brand small{ color:var(--muted); font-weight:500 }
+    nav ul{ display:flex; gap:18px; list-style:none; padding:0; margin:0 }
+    nav a{ padding:8px 12px; border-radius:10px }
+    nav a:hover{ background:#2563eb22; text-decoration:none }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:1px solid #334155; background:#0b1220aa; color:var(--txt); box-shadow:var(--shadow)}
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 12px 32px rgba(0,0,0,.25); text-decoration:none }
+
+    /* HERO */
+    .hero{ padding:80px 0 40px; position:relative; overflow:hidden }
+    .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:40px }
+    .kicker{ color:var(--brand); font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:.82rem }
+    h1{ margin:.2em 0 .3em; font-size: clamp(32px, 5.6vw, 56px); line-height:1.06 }
+    .lead{ font-size: clamp(16px, 2.2vw, 19px); color:var(--muted); max-width:60ch }
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:22px }
+
+    /* Inline SVG avatar */
+    .avatar{ width:100%; max-width:420px; margin:auto; filter:drop-shadow(0 30px 40px rgba(0,0,0,.35)) }
+
+    /* SECTIONS */
+    section{ padding:72px 0 }
+    h2{ font-size: clamp(24px, 3.8vw, 34px); margin:0 0 8px }
+    p.section-lead{ color:var(--muted); margin:0 0 28px }
+
+    .cards{ display:grid; grid-template-columns:repeat(12, 1fr); gap:18px }
+    .card{ grid-column:span 4; background:var(--card); border:1px solid #1f2937; border-radius:var(--radius); padding:18px 18px 16px; box-shadow:var(--shadow); position:relative; overflow:hidden }
+    .card .tag{ font-size:.75rem; color:#cbd5e1; background:#0ea5e933; border:1px solid #22d3ee44; padding:2px 8px; border-radius:999px }
+    .card h3{ margin:10px 0 6px; font-size:1.15rem }
+    .card p{ color:var(--muted); margin:0 }
+    @media (max-width:1000px){ .card{ grid-column:span 6 } .grid{ grid-template-columns:1fr } }
+    @media (max-width:640px){ .card{ grid-column:span 12 } }
+
+    /* Projects */
+    .project{ display:grid; grid-template-columns:1fr 1fr; gap:18px; background:var(--card); border:1px solid #1f2937; border-radius:var(--radius); padding:18px; align-items:center }
+    .project img{ width:100%; height:auto; border-radius:12px; display:block; box-shadow:var(--shadow) }
+    .project h3{ margin:.2em 0 }
+    .project p{ color:var(--muted) }
+    @media (max-width:900px){ .project{ grid-template-columns:1fr } }
+
+    /* Contact */
+    form{ display:grid; gap:12px; max-width:620px }
+    input, textarea{ width:100%; padding:12px 14px; border-radius:12px; border:1px solid #334155; background:#0b1220; color:var(--txt) }
+    input:focus, textarea:focus{ outline:2px solid var(--ring) }
+    .footer{ padding:36px 0 60px; color:var(--muted); text-align:center }
+
+    /* Decorative SVG backgrounds */
+    .bg-shape{ position:absolute; inset:auto -180px -140px auto; width:520px; opacity:.25; pointer-events:none }
+    .bg-shape.top{ inset:-140px auto auto -160px; transform:rotate(180deg) }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nahuel López",
+    "jobTitle": "Analista de Sistemas",
+    "url": "https://nhlop.github.io",
+    "sameAs": [
+      "https://github.com/nhlop",
+      "https://www.linkedin.com/in/REEMPLAZAR-por-tu-linkedin"
+    ],
+    "knowsAbout": ["RPA","Blue Prism","Power Automate","Arquitectura de software","Integraciones","Microservicios","Banca"],
+    "worksFor": {"@type":"Organization","name":"—"}
+  }
+  </script>
 </head>
+
 <body>
-  <h1>¡Hola mundo desde GitHub Pages! 🚀</h1>
-  <p>Esta es mi primera web publicada gratis en GitHub.</p>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Ir al inicio">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Nahuel López</span>
+        <small>Analista de Sistemas</small>
+      </a>
+      <nav aria-label="Principal">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="btn" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <svg class="bg-shape top" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="presentation" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#22d3ee"/>
+          </linearGradient>
+        </defs>
+        <path d="M100,150 C220,10 420,40 520,160 C600,250 500,420 360,480 C260,524 120,500 60,400 C-10,280 20,210 100,150 Z" fill="url(#g1)"/>
+      </svg>
+      <div class="container grid">
+        <div>
+          <div class="kicker">Soluciones simples para problemas complejos</div>
+          <h1>Analista de Sistemas & solucionador multifacético</h1>
+          <p class="lead">Integro procesos, datos y equipos para que las cosas <strong>funcionen</strong>. Trabajo con RPA, arquitectura, automatización y desarrollo. Me enfoco en impacto, tiempo‑to‑value y calidad.</p>
+          <div class="cta-row">
+            <a class="btn" href="#contacto">Hablemos</a>
+            <a class="btn" href="#proyectos" style="background:#0ea5e920;border-color:#22d3ee66">Ver trabajos</a>
+          </div>
+        </div>
+        <div>
+          <!-- Avatar ilustrado generado como SVG para evitar dependencias externas -->
+          <svg class="avatar" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="avatarTitle avatarDesc">
+            <title id="avatarTitle">Ilustración representativa del propietario del sitio</title>
+            <desc id="avatarDesc">Avatar minimalista: rostro estilizado con gafas y fondo geométrico</desc>
+            <defs>
+              <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#0ea5e9"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="8" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="560" height="560" rx="36" fill="#0b1220"/>
+            <circle cx="430" cy="120" r="90" fill="url(#bgGrad)" opacity=".35" filter="url(#glow)"/>
+            <circle cx="120" cy="440" r="110" fill="url(#bgGrad)" opacity=".25" filter="url(#glow)"/>
+            <g transform="translate(140,120)">
+              <rect x="0" y="220" width="280" height="160" rx="26" fill="#0f172a" stroke="#1f2937"/>
+              <circle cx="140" cy="160" r="100" fill="#111827" stroke="#1f2937"/>
+              <g id="face">
+                <path d="M70,150 q70,40 140,0 v16 q-70,40 -140,0z" fill="#0b1220"/>
+                <circle cx="100" cy="150" r="12" fill="#22d3ee"/>
+                <circle cx="180" cy="150" r="12" fill="#22d3ee"/>
+                <rect x="88" y="130" width="124" height="12" rx="6" fill="#e5e7eb"/>
+                <path d="M120,188 q20,20 40,0" stroke="#e5e7eb" stroke-width="6" fill="none" stroke-linecap="round"/>
+              </g>
+              <g id="glasses">
+                <rect x="70" y="132" width="60" height="40" rx="10" fill="none" stroke="#94a3b8" stroke-width="6"/>
+                <rect x="150" y="132" width="60" height="40" rx="10" fill="none" stroke="#94a3b8" stroke-width="6"/>
+                <rect x="130" y="146" width="20" height="8" rx="4" fill="#94a3b8"/>
+              </g>
+              <g id="laptop" transform="translate(20,240)">
+                <rect width="240" height="120" rx="14" fill="#0b1220" stroke="#1f2937"/>
+                <circle cx="120" cy="298" r="0" fill="#22d3ee"/>
+                <rect x="20" y="20" width="200" height="76" rx="10" fill="#0f172a" stroke="#1f2937"/>
+                <circle cx="120" cy="58" r="6" fill="#22d3ee"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="container">
+      <h2>Lo que hago</h2>
+      <p class="section-lead">Me muevo entre la estrategia y la ejecución. Diseño, automatizo, integro y mido. Siempre con foco en riesgo, valor y mantenibilidad.</p>
+      <div class="cards">
+        <article class="card" aria-label="Arquitectura y diseño">
+          <span class="tag">Arquitectura</span>
+          <h3>Arquitectura & Integración</h3>
+          <p>Defino patrones, APIs y topologías modernas para convivir con legados: microservicios, eventos, seguridad y observabilidad.</p>
+        </article>
+        <article class="card" aria-label="Automatización RPA">
+          <span class="tag">RPA</span>
+          <h3>Automatización de procesos</h3>
+          <p>RPA con Blue Prism/Power Automate, orquestación, métricas y gobernanza. Quick wins sin sacrificar calidad.</p>
+        </article>
+        <article class="card" aria-label="Desarrollo y datos">
+          <span class="tag">Dev & Data</span>
+          <h3>Desarrollo & Datos</h3>
+          <p>Backends en Node/Java/Python, pipelines de datos y tableros (Power BI) para convertir procesos en decisiones.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROYECTOS (mock) -->
+    <section id="proyectos" class="container">
+      <h2>Proyectos seleccionados</h2>
+      <p class="section-lead">Algunos ejemplos de impacto. Si querés ver más, escribime y te comparto detalles privados.</p>
+      <div class="project" role="article">
+        <div>
+          <h3>Automatización de alertas bancarias</h3>
+          <p>Detección y gestión de alertas de movimientos sospechosos: canalización omnicanal, respuesta del cliente y reporte consolidado.</p>
+          <ul>
+            <li>• Ahorro de 65% de tiempo operativo</li>
+            <li>• Trazabilidad end‑to‑end y auditoría</li>
+            <li>• Integración con WhatsApp/Twilio y core</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn" href="#contacto">Pedir demo</a>
+          </div>
+        </div>
+        <img src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0%' stop-color='%230ea5e9'/><stop offset='100%' stop-color='%2322d3ee'/></linearGradient></defs><rect width='800' height='500' rx='18' fill='%230b1220'/><g opacity='.2'><circle cx='120' cy='120' r='90' fill='url(%23g)'/><circle cx='710' cy='90' r='70' fill='url(%23g)'/><circle cx='680' cy='420' r='100' fill='url(%23g)'/></g><g fill='none' stroke='%238198a8' stroke-width='2'><rect x='60' y='60' width='300' height='180' rx='12'/><path d='M80 100h120M80 130h160M80 160h180'/><rect x='420' y='60' width='320' height='380' rx='12'/><circle cx='580' cy='250' r='70' stroke='%23f59e0b' stroke-width='3'/><path d='M520 250h120M580 190v120'/></g></svg>" alt="Gráfico abstracto de tablero y alertas" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- SOBRE MI -->
+    <section id="sobre-mi" class="container">
+      <h2>Sobre mí</h2>
+      <p class="section-lead">Curioso, pragmático y obsesivo de los detalles útiles. Mi superpoder: bajar la complejidad a tierra y mover equipos para entregar valor.</p>
+      <div class="cards">
+        <article class="card"><h3>Enfoque</h3><p>Descubrir → Diseñar → Entregar → Medir. KPI antes que opinión. Riesgo controlado, entregas iterativas.</p></article>
+        <article class="card"><h3>Stack</h3><p>Blue Prism, Power Automate, Node.js, Java/Spring, Python, Power BI, GitHub Actions, Docker.</p></article>
+        <article class="card"><h3>Industrias</h3><p>Finanzas y banca, canales digitales, automatización de back‑office, integración con legados.</p></article>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="container">
+      <h2>Contacto</h2>
+      <p class="section-lead">¿Te interesa colaborar o tenés un desafío en mente? Contame y vemos cómo lo resolvemos.</p>
+      <form action="https://formspree.io/f/your-code-here" method="POST">
+        <!-- Reemplazá el action con tu endpoint de Formspree, Netlify Forms o similar.  -->
+        <label>
+          <span>Nombre</span>
+          <input name="name" required placeholder="Tu nombre" autocomplete="name" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required placeholder="tunombre@empresa.com" autocomplete="email" />
+        </label>
+        <label>
+          <span>Mensaje</span>
+          <textarea name="message" rows="5" required placeholder="¿Qué problema querés resolver?"></textarea>
+        </label>
+        <button class="btn" type="submit">Enviar</button>
+        <p style="color:var(--muted); font-size:.9rem">También podés escribirme a <a href="mailto:reemplazar@tu-dominio.com">reemplazar@tu-dominio.com</a>.</p>
+      </form>
+    </section>
+
+    <section class="footer">
+      <div class="container">
+        <p>© <span id="y"></span> Nahuel López — Hecho con HTML/CSS/JS. Hospedado en GitHub Pages.</p>
+        <p>
+          <a href="https://github.com/nhlop" target="_blank" rel="nofollow noopener">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/REEMPLAZAR-por-tu-linkedin" target="_blank" rel="nofollow noopener">LinkedIn</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // utilidades pequeñas
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // scroll suave para anclas
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
 </body>
 </html>
